@@ -14,6 +14,43 @@ namespace EURISTest.Controllers
         private DatabaseContext db = new DatabaseContext();
 
         //
+        // GET: /ProductCatalog/Create
+
+        public ActionResult AddProduct(int id = 0)
+        {
+            List<Catalog> cat = new List<Catalog>();
+            cat.Add(db.Catalogs.Find(id));
+            
+            if(cat==null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.FKCatalogID = new SelectList(cat, "CatalogID", "Code");
+            ViewBag.FKProductID = new SelectList(db.Products, "ProductID", "Code");
+            return View();
+        }
+
+        //
+        // POST: /ProductCatalog/Create
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddProduct(ProductCatalog productcatalog)
+        {
+            if (ModelState.IsValid)
+            {
+                db.ProductsCatalogs.Add(productcatalog);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.FKCatalogID = new SelectList(db.Catalogs, "CatalogID", "Code", productcatalog.FKCatalogID);
+            ViewBag.FKProductID = new SelectList(db.Products, "ProductID", "Code", productcatalog.FKProductID);
+            return View(productcatalog);
+        }
+
+
+        //
         // GET: /Catalog/
 
         public ActionResult Index()
@@ -31,10 +68,18 @@ namespace EURISTest.Controllers
             {
                 return HttpNotFound();
             }
-            return View(catalog);
+
+            var productCatalog = db.ProductsCatalogs.Include(c => c.Catalog).Include(c => c.Product);
+            List<ProductCatalog> controllo = new List<ProductCatalog>();
+            foreach (var item in productCatalog.ToList())
+            {
+                if (item.Catalog.CatalogID == catalog.CatalogID)
+                    controllo.Add(item);
+            }
+            return View(controllo);
         }
 
-        //
+        //  
         // GET: /Catalog/Create
 
         public ActionResult Create()

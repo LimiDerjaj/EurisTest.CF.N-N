@@ -7,13 +7,16 @@ using System.Web;
 
 namespace EURISTest.Models
 {
+    [Table("ProductCatalogs")]
     public class ProductCatalog
     {
-        [Key, Column(Order = 1)]
-        public int ProductId { get; set; }
-        [Key, Column(Order = 2)]
-        public int CatalogId { get; set; }
-        public Product Product { get; set; }
+        [Key]
+        public int ProductCatalogID { get; set; }
+        public int FKCatalogID { get; set; }
+        [ForeignKey("FKCatalogID")]
         public Catalog Catalog { get; set; }
+        public int FKProductID { get; set; }
+        [ForeignKey("FKProductID")]
+        public Product Product { get; set; }
     }
 }

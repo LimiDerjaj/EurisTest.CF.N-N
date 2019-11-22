@@ -1,29 +1,75 @@
-﻿@model EURISTest.Models.Catalog
+﻿@model IEnumerable<EURISTest.Models.ProductCatalog>
+
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "CatalogDetails";
 }
 
-<h2>Details</h2>
+@foreach (var item in Model)
+{
+    <h2>Catalog: @Html.DisplayFor(modelItem => item.Catalog.Description)</h2>
+    <table>
+        <tr>
+            <th>Code</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Catalog.Code)</td>
+            <td>@Html.DisplayFor(modelItem => item.Catalog.Description)</td>
+        </tr>
+    </table>
+    <p>
+        @Html.ActionLink("Add Products", "AddProduct", new { id = item.Catalog.CatalogID })
+    </p>
+    break;
+}
 
-<fieldset>
-    <legend>Catalog</legend>
+<table>
+    <tr>
+        <th>
+            Products 
+        </th>
+    </tr>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Code)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Code)
-    </div>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td style="text-align:center">
+                @Html.DisplayFor(modelItem => item.Product.Description)
+            </td>
+        </tr>
+    }
+</table>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Description)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Description)
-    </div>
-</fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.CatalogID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+
+
+@*@model EURISTest.Models.Catalog
+
+    @{
+        ViewBag.Title = "Details";
+    }
+
+    <h2>Details</h2>
+
+    <fieldset>
+        <legend>Catalog</legend>
+
+        <div class="display-label">
+             @Html.DisplayNameFor(model => model.Code)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Code)
+        </div>
+
+        <div class="display-label">
+             @Html.DisplayNameFor(model => model.Description)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Description)
+        </div>
+    </fieldset>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id=Model.CatalogID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@

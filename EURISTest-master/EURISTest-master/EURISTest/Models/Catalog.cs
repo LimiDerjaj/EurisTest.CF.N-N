@@ -21,11 +21,7 @@ namespace EURISTest.Models
         [StringLength(50, ErrorMessage = "Maximum length is 50 char")]
         public string Description { get; set; }
 
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<ProductCatalog> Catalogs { get; set; }
 
-        public Catalog()
-        {
-            Products = new HashSet<Product>();
-        }
     }
 }
