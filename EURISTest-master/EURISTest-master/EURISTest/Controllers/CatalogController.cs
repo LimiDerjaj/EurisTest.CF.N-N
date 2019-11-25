@@ -76,6 +76,8 @@ namespace EURISTest.Controllers
                 if (item.Catalog.CatalogID == catalog.CatalogID)
                     controllo.Add(item);
             }
+            ProductCatalog p = new ProductCatalog();
+            controllo.Add(p);
             return View(controllo);
         }
 
