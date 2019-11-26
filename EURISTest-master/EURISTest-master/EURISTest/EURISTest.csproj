@@ -321,11 +321,6 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Catalog\Index.cshtml" />
-    <Content Include="Views\Catalog\Details.cshtml" />
-    <Content Include="Views\Catalog\Create.cshtml" />
-    <Content Include="Views\Catalog\Edit.cshtml" />
-    <Content Include="Views\Catalog\Delete.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Product\Details.cshtml" />
     <Content Include="Views\Product\Create.cshtml" />
@@ -336,7 +331,14 @@
     <Content Include="Views\ProductCatalog\Create.cshtml" />
     <Content Include="Views\ProductCatalog\Edit.cshtml" />
     <Content Include="Views\ProductCatalog\Delete.cshtml" />
+    <Content Include="Views\Catalog\Index.cshtml" />
+    <Content Include="Views\Catalog\Details.cshtml" />
+    <Content Include="Views\Catalog\Create.cshtml" />
+    <Content Include="Views\Catalog\Edit.cshtml" />
+    <Content Include="Views\Catalog\Delete.cshtml" />
     <Content Include="Views\Catalog\AddProduct.cshtml" />
+    <Content Include="Views\Catalog\CatProducts.cshtml" />
+    <Content Include="Views\Catalog\DeleteProd.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

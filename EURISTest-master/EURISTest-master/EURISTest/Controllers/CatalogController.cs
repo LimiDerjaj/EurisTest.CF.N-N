@@ -20,8 +20,8 @@ namespace EURISTest.Controllers
         {
             List<Catalog> cat = new List<Catalog>();
             cat.Add(db.Catalogs.Find(id));
-            
-            if(cat==null)
+
+            if (cat == null)
             {
                 return HttpNotFound();
             }
@@ -49,19 +49,10 @@ namespace EURISTest.Controllers
             return View(productcatalog);
         }
 
-
         //
-        // GET: /Catalog/
+        // GET: /Catalog/CatProducts/5
 
-        public ActionResult Index()
-        {
-            return View(db.Catalogs.ToList());
-        }
-
-        //
-        // GET: /Catalog/Details/5
-
-        public ActionResult Details(int id = 0)
+        public ActionResult CatProducts(int id = 0)
         {
             Catalog catalog = db.Catalogs.Find(id);
             if (catalog == null)
@@ -81,8 +72,29 @@ namespace EURISTest.Controllers
             return View(controllo);
         }
 
-        //  
-        // GET: /Catalog/Create
+        //
+        // GET: /Catalog2/
+
+        public ActionResult Index()
+        {
+            return View(db.Catalogs.ToList());
+        }
+
+        //
+        // GET: /Catalog2/Details/5
+
+        public ActionResult Details(int id = 0)
+        {
+            Catalog catalog = db.Catalogs.Find(id);
+            if (catalog == null)
+            {
+                return HttpNotFound();
+            }
+            return View(catalog);
+        }
+
+        //
+        // GET: /Catalog2/Create
 
         public ActionResult Create()
         {
@@ -90,7 +102,7 @@ namespace EURISTest.Controllers
         }
 
         //
-        // POST: /Catalog/Create
+        // POST: /Catalog2/Create
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -107,7 +119,7 @@ namespace EURISTest.Controllers
         }
 
         //
-        // GET: /Catalog/Edit/5
+        // GET: /Catalog2/Edit/5
 
         public ActionResult Edit(int id = 0)
         {
@@ -120,7 +132,7 @@ namespace EURISTest.Controllers
         }
 
         //
-        // POST: /Catalog/Edit/5
+        // POST: /Catalog2/Edit/5
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -136,7 +148,7 @@ namespace EURISTest.Controllers
         }
 
         //
-        // GET: /Catalog/Delete/5
+        // GET: /Catalog2/Delete/5
 
         public ActionResult Delete(int id = 0)
         {
@@ -149,7 +161,7 @@ namespace EURISTest.Controllers
         }
 
         //
-        // POST: /Catalog/Delete/5
+        // POST: /Catalog2/Delete/5
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -161,10 +173,37 @@ namespace EURISTest.Controllers
             return RedirectToAction("Index");
         }
 
+        //
+        // GET: /ProductCatalog/Delete/5
+
+        public ActionResult DeleteProd(int id = 0)
+        {
+            ProductCatalog productcatalog = db.ProductsCatalogs.Find(id);
+            if (productcatalog == null)
+            {
+                return HttpNotFound();
+            }
+            return View(productcatalog);
+        }
+
+        //
+        // POST: /ProductCatalog/Delete/5
+
+        [HttpPost, ActionName("DeleteProd")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteProdConfirmed(int id)
+        {
+            ProductCatalog productcatalog = db.ProductsCatalogs.Find(id);
+            db.ProductsCatalogs.Remove(productcatalog);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();
             base.Dispose(disposing);
         }
+
     }
 }

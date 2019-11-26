@@ -1,0 +1,17 @@
+﻿@model EURISTest.Models.ProductCatalog
+@{
+    ViewBag.Title = "Delete";
+}
+<h2>Delete</h2>
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>ProductCatalog</legend>
+</fieldset>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="DeleteProd" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

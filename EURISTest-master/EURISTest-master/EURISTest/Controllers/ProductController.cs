@@ -16,9 +16,16 @@ namespace EURISTest.Controllers
         //
         // GET: /Product/
 
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
-            return View(db.Products.ToList());
+            var products = from p in db.Products
+                         select p;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                products = products.Where(s => s.Description.Contains(searchString));
+            }
+            return View(products);//db.Products.ToList()
         }
 
         //
