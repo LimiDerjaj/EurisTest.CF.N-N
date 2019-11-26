@@ -16,17 +16,33 @@ namespace EURISTest.Controllers
         //
         // GET: /ProductCatalog/Create
 
+            /// <summary>
+            /// Controller function add new products to the selected catalog
+            /// </summary>
+            /// <param name="id"></param>
+            /// <returns>view</returns>
         public ActionResult AddProduct(int id = 0)
         {
-            List<Catalog> cat = new List<Catalog>();
-            cat.Add(db.Catalogs.Find(id));
+            List<Product> prd = db.Products.ToList();
+            List<Catalog> cat = new List<Catalog>();         
+            var cId = db.Catalogs.Find(id);
+            cat.Add(cId);
 
+            foreach (var item in (db.ProductsCatalogs.Include(pro => pro.Catalog).Include(pro => pro.Product)).ToList())
+            {
+                if (item.Catalog.CatalogID == cId.CatalogID)
+                    foreach (var prodotto in db.Products.ToList())
+                    {
+                        if ((prodotto.ProductID == item.Product.ProductID))
+                            prd.Remove(prodotto);
+                    }
+            }
             if (cat == null)
             {
                 return HttpNotFound();
             }
             ViewBag.FKCatalogID = new SelectList(cat, "CatalogID", "Code");
-            ViewBag.FKProductID = new SelectList(db.Products, "ProductID", "Code");
+            ViewBag.FKProductID = new SelectList(prd, "ProductID", "Code");
             return View();
         }
 

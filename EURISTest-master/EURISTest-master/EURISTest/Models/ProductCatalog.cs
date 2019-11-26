@@ -10,6 +10,9 @@ namespace EURISTest.Models
     [Table("ProductCatalogs")]
     public class ProductCatalog
     {
+        /// <summary>
+        /// many to many table properties
+        /// </summary>
         [Key]
         public int ProductCatalogID { get; set; }
         public int FKCatalogID { get; set; }

@@ -12,7 +12,9 @@ namespace EURISTest.Models
     [Table("Products")]
     public class Product
     {
-
+        /// <summary>
+        /// Product Properties
+        /// </summary>
         [Key]
         public int ProductID { get; set; }
 

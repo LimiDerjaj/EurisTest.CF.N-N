@@ -16,6 +16,11 @@ namespace EURISTest.Controllers
         //
         // GET: /Product/
 
+            /// <summary>
+            /// index of products with search by description function
+            /// </summary>
+            /// <param name="searchString"></param>
+            /// <returns></returns>
         public ActionResult Index(string searchString)
         {
             var products = from p in db.Products
